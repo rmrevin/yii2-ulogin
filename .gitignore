@@ -1,0 +1,9 @@
+#phpstorm
+.idea/
+
+#composer
+vendor/
+composer.lock
+
+#phpunit
+coverage/
