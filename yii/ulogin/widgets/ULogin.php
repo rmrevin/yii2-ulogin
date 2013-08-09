@@ -9,6 +9,7 @@ namespace yii\ulogin\widgets;
 use yii\base\View;
 use yii\base\Widget;
 use yii\helpers\Html;
+use yii\ulogin\ULoginException;
 
 class ULogin extends Widget
 {
@@ -21,14 +22,14 @@ class ULogin extends Widget
 
 	public $hidden = [self::P_OTHER];
 
-	public $redirect_uri = null;
+	public $redirect_uri = [];
 
 	public function init()
 	{
 		parent::init();
 
-		if ($this->redirect_uri === null) {
-			$this->redirect_uri = ['ulogin/adapter'];
+		if (empty($this->redirect_uri)) {
+			throw new ULoginException(\Yii::t('app', 'You must specify the "{param}".', ['{param}' => 'redirect_uri']));
 		}
 
 		\Yii::$app->getView()->registerJsFile('//ulogin.ru/js/ulogin.js', ['position' => View::POS_HEAD]);
@@ -36,6 +37,8 @@ class ULogin extends Widget
 
 	public function run()
 	{
+		$route = array_shift($this->redirect_uri);
+
 		echo Html::tag('div', '', [
 			'id' => $this->getId(),
 			'data-ulogin' => str_replace(['&', '%2C'], [';', ','], http_build_query([
@@ -43,7 +46,7 @@ class ULogin extends Widget
 				'fields' => implode(',', $this->fields),
 				'providers' => implode(',', $this->providers),
 				'hidden' => implode(',', $this->hidden),
-				'redirect_uri' => \Yii::$app->getUrlManager()->createAbsoluteUrl($this->redirect_uri)
+				'redirect_uri' => \Yii::$app->getUrlManager()->createAbsoluteUrl($route, $this->redirect_uri)
 			]))
 		]);
 	}
