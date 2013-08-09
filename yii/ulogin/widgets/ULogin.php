@@ -37,6 +37,12 @@ class ULogin extends Widget
 	public $redirect_uri = [];
 
 	/**
+	 * @link https://ulogin.ru/faq.html
+	 * @var bool whether to call the "uLogin.customInit()" button to initialize the widget.
+	 */
+	public $execute_custom_init = false;
+
+	/**
 	 * Initializes the widget.
 	 * @throws \yii\ulogin\ULoginException
 	 */
@@ -56,10 +62,11 @@ class ULogin extends Widget
 	 */
 	public function run()
 	{
+		$widget_id = $this->getId();
 		$route = array_shift($this->redirect_uri);
 
 		echo Html::tag('div', '', [
-			'id' => $this->getId(),
+			'id' => $widget_id,
 			'data-ulogin' => str_replace(['&', '%2C'], [';', ','], http_build_query([
 				'display' => $this->display,
 				'fields' => implode(',', $this->fields),
@@ -68,6 +75,10 @@ class ULogin extends Widget
 				'redirect_uri' => \Yii::$app->getUrlManager()->createAbsoluteUrl($route, $this->redirect_uri)
 			]))
 		]);
+
+		if ($this->execute_custom_init === true) {
+			\Yii::$app->getView()->registerJs("uLogin.customInit('$widget_id');");
+		}
 	}
 
 	/** constants for $display param */
