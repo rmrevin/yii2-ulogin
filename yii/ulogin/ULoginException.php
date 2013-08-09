@@ -6,6 +6,10 @@
 
 namespace yii\ulogin;
 
+/**
+ * Class ULoginException
+ * @package yii\ulogin
+ */
 class ULoginException extends \RuntimeException
 {
 

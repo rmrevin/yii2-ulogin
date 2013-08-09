@@ -11,19 +11,35 @@ use yii\base\Widget;
 use yii\helpers\Html;
 use yii\ulogin\ULoginException;
 
+/**
+ * Class ULogin
+ * @package yii\ulogin\widgets
+ */
 class ULogin extends Widget
 {
 
+	/** @var string form factor */
 	public $display = self::D_SMALL;
 
+	/** @var array fields that must be obtained from the social network */
 	public $fields = [self::F_FIRST_NAME, self::F_LAST_NAME, self::F_EMAIL];
 
+	/** @var array providers that will be displayed in the widget */
 	public $providers = [self::P_VKONTAKTE, self::P_FACEBOOK, self::P_TWITTER, self::P_GOOGLE];
 
+	/** @var array providers that will appear in the drop-down list widget */
 	public $hidden = [self::P_OTHER];
 
+	/**
+	 * @example ['sign/in', 'type' => 'ulogin-response']
+	 * @var array scheme for the formation of an URL to which the response will be returned ulogin
+	 */
 	public $redirect_uri = [];
 
+	/**
+	 * Initializes the widget.
+	 * @throws \yii\ulogin\ULoginException
+	 */
 	public function init()
 	{
 		parent::init();
@@ -35,6 +51,9 @@ class ULogin extends Widget
 		\Yii::$app->getView()->registerJsFile('//ulogin.ru/js/ulogin.js', ['position' => View::POS_HEAD]);
 	}
 
+	/**
+	 * Executes the widget.
+	 */
 	public function run()
 	{
 		$route = array_shift($this->redirect_uri);
@@ -51,12 +70,14 @@ class ULogin extends Widget
 		]);
 	}
 
+	/** constants for $display param */
 	const D_SMALL = 'small';
 
 	const D_PANEL = 'panel';
 
 	const D_WINDOW = 'window';
 
+	/** constants for $fields param */
 	const F_FIRST_NAME = 'first_name';
 
 	const F_LAST_NAME = 'last_name';
@@ -79,6 +100,7 @@ class ULogin extends Widget
 
 	const F_COUNTRY = 'country';
 
+	/** constants for $providers and $hidden params */
 	const P_OTHER = 'other';
 
 	const P_VKONTAKTE = 'vkontakte';
