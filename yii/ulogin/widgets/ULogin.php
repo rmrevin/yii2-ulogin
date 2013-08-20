@@ -1,7 +1,8 @@
 <?php
 /**
  * ULogin.php
- * @author: Revin Roman <xgismox@gmail.com>
+ * @author Roman Revin
+ * @link http://phptime.ru
  */
 
 namespace yii\ulogin\widgets;
