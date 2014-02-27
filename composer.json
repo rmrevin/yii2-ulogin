@@ -2,8 +2,9 @@
 	"name": "rmrevin/yii2-ulogin",
 	"description": "Extension for yii2 ulogin integration",
 	"keywords": ["yii2", "ulogin", "oauth", "authorization"],
-	"type": "library",
+	"type": "yii2-extension",
 	"license": "BSD-3-Clause",
+	"minimum-stability": "dev",
 	"support": {
 		"issues": "https://github.com/rmrevin/yii2-ulogin/issues?state=open",
 		"wiki": "https://github.com/rmrevin/yii2-ulogin/wiki",
@@ -13,8 +14,7 @@
 		{
 			"name": "Revin Roman",
 			"email": "xgismox@gmail.com",
-			"homepage": "http://rmrevin.ru/",
-			"role": "Founder and project lead"
+			"homepage": "http://phptime.ru/"
 		},
 		{
 			"name": "uLogin",
@@ -22,14 +22,12 @@
 			"role": "OAuth provider"
 		}
 	],
-	"minimum-stability": "dev",
 	"require": {
-		"php": ">=5.4.0",
 		"yiisoft/yii2": "*"
 	},
 	"autoload": {
-		"psr-0": {
-			"yii\\ulogin": "./"
+		"psr-4": {
+			"rmrevin\\yii\\ulogin\\": ""
 		}
 	}
 }

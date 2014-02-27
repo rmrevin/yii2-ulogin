@@ -4,7 +4,7 @@
  * @author: Revin Roman <xgismox@gmail.com>
  */
 
-namespace yii\ulogin;
+namespace rmrevin\yii\ulogin;
 
 /**
  * Class ULoginException

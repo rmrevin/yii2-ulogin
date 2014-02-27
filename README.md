@@ -7,7 +7,7 @@ In `composer.json`:
 ```
 {
     "require": {
-        "rmrevin/yii2-ulogin": "1.0.*"
+        "rmrevin/yii2-ulogin": "1.1.*"
     }
 }
 ```
@@ -15,7 +15,7 @@ In `composer.json`:
 Usage
 -----
 ```php
-use yii\ulogin\widgets\ULogin;
+use rmrevin\yii\ulogin\ULogin;
 
 echo ULogin::widget([
 	'display' => ULogin::D_PANEL,
