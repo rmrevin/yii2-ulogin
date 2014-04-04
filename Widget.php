@@ -54,7 +54,11 @@ class Widget extends \yii\base\Widget
 
 		\Yii::$app
 			->getView()
-			->registerJsFile('//ulogin.ru/js/ulogin.js', ['position' => View::POS_HEAD]);
+			->registerJsFile(
+				'//ulogin.ru/js/ulogin.js',
+				[],
+				['position' => View::POS_HEAD]
+			);
 	}
 
 	/**
@@ -64,15 +68,17 @@ class Widget extends \yii\base\Widget
 	{
 		$widget_id = $this->getId();
 
+		$action = str_replace(['&', '%2C'], [';', ','], http_build_query([
+			'display' => $this->display,
+			'fields' => implode(',', $this->fields),
+			'providers' => implode(',', $this->providers),
+			'hidden' => implode(',', $this->hidden),
+			'redirect_uri' => \Yii::$app->getUrlManager()->createAbsoluteUrl($this->redirect_uri)
+		]));
+
 		echo Html::tag('div', '', [
 			'id' => $widget_id,
-			'data-ulogin' => str_replace(['&', '%2C'], [';', ','], http_build_query([
-				'display' => $this->display,
-				'fields' => implode(',', $this->fields),
-				'providers' => implode(',', $this->providers),
-				'hidden' => implode(',', $this->hidden),
-				'redirect_uri' => \Yii::$app->getUrlManager()->createAbsoluteUrl($this->redirect_uri)
-			]))
+			'data-ulogin' => $action,
 		]);
 
 		if ($this->execute_custom_init === true) {
