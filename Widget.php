@@ -57,14 +57,14 @@ class Widget extends \yii\base\Widget
 
     /**
      * Initializes the widget.
-     * @throws ULoginException
+     * @throws \rmrevin\yii\ulogin\Exception
      */
     public function init()
     {
         parent::init();
 
         if (empty($this->redirect_uri)) {
-            throw new ULoginException(\Yii::t('app', 'You must specify the "{param}".', ['{param}' => 'redirect_uri']));
+            throw new Exception(\Yii::t('app', 'You must specify the "{param}".', ['{param}' => 'redirect_uri']));
         }
 
         \Yii::$app

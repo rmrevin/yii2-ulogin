@@ -7,7 +7,7 @@ In `composer.json`:
 ```
 {
     "require": {
-        "rmrevin/yii2-ulogin": "1.1.*"
+        "rmrevin/yii2-ulogin": "1.2.0"
     }
 }
 ```
