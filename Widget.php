@@ -71,7 +71,6 @@ class Widget extends \yii\base\Widget
             ->getView()
             ->registerJsFile(
                 '//ulogin.ru/js/ulogin.js',
-                [],
                 ['position' => View::POS_HEAD]
             );
     }
