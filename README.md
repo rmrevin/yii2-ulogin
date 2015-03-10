@@ -15,9 +15,7 @@ In `composer.json`:
 Usage
 -----
 ```php
-use rmrevin\yii\ulogin\ULogin;
-
-echo ULogin::widget([
+echo rmrevin\yii\ulogin\ULogin::widget([
     // widget look'n'feel
     'display' => ULogin::D_PANEL,
 

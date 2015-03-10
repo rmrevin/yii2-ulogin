@@ -1,10 +1,15 @@
 {
   "name": "rmrevin/yii2-ulogin",
   "description": "Extension for yii2 ulogin integration",
-  "keywords": ["yii2", "ulogin", "oauth", "authorization"],
+  "keywords": [
+    "yii2",
+    "ulogin",
+    "oauth",
+    "authorization"
+  ],
   "type": "yii2-extension",
-  "license": "BSD-3-Clause",
-  "minimum-stability": "dev",
+  "license": "MIT",
+  "minimum-stability": "stable",
   "support": {
     "issues": "https://github.com/rmrevin/yii2-ulogin/issues?state=open",
     "wiki": "https://github.com/rmrevin/yii2-ulogin/wiki",
@@ -23,7 +28,7 @@
     }
   ],
   "require": {
-    "yiisoft/yii2": "*"
+    "yiisoft/yii2": "2.0.*"
   },
   "autoload": {
     "psr-4": {

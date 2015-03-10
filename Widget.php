@@ -1,7 +1,7 @@
 <?php
 /**
  * Widget.php
- * @author: Revin Roman <xgismox@gmail.com>
+ * @author Revin Roman http://phptime.ru
  */
 
 namespace rmrevin\yii\ulogin;
