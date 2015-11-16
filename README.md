@@ -1,21 +1,32 @@
-Extension for yii2 ulogin integration
-==========
+ULogin integration for Yii 2
+============================
 
 Installation
 ------------
-In `composer.json`:
+
+The preferred way to install this extension is through [composer](https://getcomposer.org/).
+
+Either run
+
+```bash
+composer require "rmrevin/yii2-ulogin:1.3.*"
 ```
-{
-    "require": {
-        "rmrevin/yii2-ulogin": "1.2.0"
-    }
-}
+
+or add
+
 ```
+"rmrevin/yii2-ulogin": "1.3.*",
+```
+
+to the `require` section of your `composer.json` file.
 
 Usage
 -----
+
 ```php
-echo rmrevin\yii\ulogin\ULogin::widget([
+use rmrevin\yii\ulogin\ULogin;
+
+echo ULogin::widget([
     // widget look'n'feel
     'display' => ULogin::D_PANEL,
 
@@ -32,20 +43,20 @@ echo rmrevin\yii\ulogin\ULogin::widget([
     'hidden' => [],
 
     // where to should ULogin redirect users after successful login
-    'redirect_uri' => ['sign/ulogin'],
+    'redirectUri' => ['sign/ulogin'],
 
     // optional params (can be ommited)
     // force widget language (autodetect by default)
-    'lang' => ULogin::L_RU,
+    'language' => ULogin::L_RU,
 
     // providers sorting ('relevant' by default)
-    'sort' => ULogin::S_RELEVANT,
+    'sortProviders' => ULogin::S_RELEVANT,
 
     // verify users' email (disabled by default)
-    'verify' => '0',
+    'verifyEmail' => '0',
 
     // mobile buttons style (enabled by default)
-    'mobilebuttons' => '1',
+    'mobileButtons' => '1',
 ]);
 
 ```

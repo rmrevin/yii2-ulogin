@@ -1,7 +1,8 @@
 <?php
 /**
  * ULogin.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
+ * @link https://rmrevin.com
  */
 
 namespace rmrevin\yii\ulogin;
@@ -74,6 +75,7 @@ class ULogin
     const L_UK = 'uk';
     const L_FR = 'fr';
     const L_DE = 'de';
+    const L_UZ = 'uz';
 
     /** constants for $sort param */
     const S_DEFAULT = 'default';
