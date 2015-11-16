@@ -74,13 +74,16 @@ class SiteController extends Controller
             'ulogin-auth' => [
                 'class' => AuthAction::className(),
                 'successCallback' => [$this, 'uloginSuccessCallback'],
+                'errorCallback' => function($data){
+                    \Yii::error($data['error']);
+                },
             ]
         ];
     }
 
-    public function uloginSuccessCallback($data)
+    public function uloginSuccessCallback($attributes)
     {
-        print_r($data);
+        print_r($attributes);
     }
 }
 ```
