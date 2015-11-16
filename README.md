@@ -58,5 +58,29 @@ echo ULogin::widget([
     // mobile buttons style (enabled by default)
     'mobileButtons' => '1',
 ]);
+```
 
+Getting user info after success auth (response from ulogin):
+```php
+use rmrevin\yii\ulogin\AuthAction;
+
+class SiteController extends Controller
+{
+
+    public function action()
+    {
+        return [
+            // ...
+            'ulogin-auth' => [
+                'class' => AuthAction::className(),
+                'successCallback' => [$this, 'uloginSuccessCallback'],
+            ]
+        ];
+    }
+
+    public function uloginSuccessCallback($data)
+    {
+        print_r($data);
+    }
+}
 ```

@@ -7,6 +7,9 @@
 
 namespace rmrevin\yii\ulogin;
 
+use yii\helpers\Json;
+use yii\web\Request;
+
 /**
  * Class ULogin
  * @package rmrevin\yii\ulogin
@@ -21,6 +24,39 @@ class ULogin
     public static function widget($config = [])
     {
         return Widget::widget($config);
+    }
+
+    /**
+     * @param string $token
+     * @param string|null $host
+     * @return array|null
+     */
+    public static function getUserAttributes($token, $host = null)
+    {
+        $Request = \Yii::$app->getRequest();
+
+        $host = empty($host) && $Request instanceof Request
+            ? $Request->getServerName()
+            : $host;
+
+        $query = [
+            'token' => $token,
+            'host' => $host,
+        ];
+
+        $url = 'http://ulogin.ru/token.php?' . http_build_query($query);
+
+        if (function_exists('file_get_contents') && ini_get('allow_url_fopen')) {
+            $result = Json::decode(file_get_contents($url));
+        } elseif (in_array('curl', get_loaded_extensions())) {
+            $request = curl_init($url);
+            curl_setopt($request, CURLOPT_RETURNTRANSFER, 1);
+            $result = Json::decode(curl_exec($request));
+        } else {
+            $result = null;
+        }
+
+        return $result;
     }
 
     /** constants for $display param */
