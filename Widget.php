@@ -3,23 +3,19 @@
  * Widget.php
  * @author Revin Roman
  * @link https://rmrevin.com
+ * @link https://github.com/rmrevin/yii2-ulogin
  */
 
 namespace rmrevin\yii\ulogin;
 
-use yii\base\Exception;
+use yii\base\InvalidArgumentException;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\web\UrlManager;
 use yii\web\View;
 
-/**
- * Class Widget
- * @package rmrevin\yii\ulogin
- */
 class Widget extends \yii\base\Widget
 {
-
     /** @var string form factor */
     public $display = ULogin::D_SMALL;
 
@@ -66,6 +62,9 @@ class Widget extends \yii\base\Widget
      */
     public $redirect_uri;
 
+    /** @var string|null use force http/https in redirect url */
+    public $forceRedirectUrlScheme;
+
     /**
      * @link https://ulogin.ru/faq.html
      * @var bool whether to call the "uLogin.customInit()" button to initialize the widget.
@@ -96,7 +95,6 @@ class Widget extends \yii\base\Widget
 
     /**
      * Initializes the widget.
-     * @throws \rmrevin\yii\ulogin\Exception
      */
     public function init()
     {
@@ -113,7 +111,7 @@ class Widget extends \yii\base\Widget
         }
 
         if (empty($this->redirectUri)) {
-            throw new Exception(\Yii::t('app', 'You must specify the "{param}".', ['{param}' => 'redirectUri']));
+            throw new InvalidArgumentException(\Yii::t('app', 'You must specify the "{param}".', ['{param}' => 'redirectUri']));
         }
 
         $this->getView()
@@ -127,17 +125,13 @@ class Widget extends \yii\base\Widget
     {
         $widget_id = $this->getId();
 
-        $urlManager = is_string($this->urlManager)
-            ? \Yii::$app->get($this->urlManager, false)
-            : $this->urlManager;
-
         $widget_params = [
             'display' => $this->display,
             'fields' => implode(',', $this->fields),
             'optional' => implode(',', $this->optional),
             'providers' => implode(',', $this->providers),
             'hidden' => implode(',', $this->hidden),
-            'redirect_uri' => $urlManager->createAbsoluteUrl($this->redirectUri)
+            'redirect_uri' => $this->createAbsoluteUrl($this->forceRedirectUrlScheme),
         ];
 
         // lang param by default is not set
@@ -178,6 +172,11 @@ class Widget extends \yii\base\Widget
         $this->registerCallback($widget_id, 'receive', $this->onReceive);
     }
 
+    protected function createAbsoluteUrl($forceScheme = null)
+    {
+        return $this->getUrlManager()->createAbsoluteUrl($this->redirectUri, $forceScheme);
+    }
+
     protected function registerCallback($widget_id, $event, $function)
     {
         if (!empty($function)) {
@@ -204,5 +203,12 @@ class Widget extends \yii\base\Widget
             [';', ','],
             http_build_query($params)
         );
+    }
+
+    protected function getUrlManager()
+    {
+        return is_string($this->urlManager)
+            ? \Yii::$app->get($this->urlManager, false)
+            : $this->urlManager;
     }
 }

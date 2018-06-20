@@ -3,6 +3,7 @@
  * ULogin.php
  * @author Revin Roman
  * @link https://rmrevin.com
+ * @link https://github.com/rmrevin/yii2-ulogin
  */
 
 namespace rmrevin\yii\ulogin;
@@ -10,16 +11,12 @@ namespace rmrevin\yii\ulogin;
 use yii\helpers\Json;
 use yii\web\Request;
 
-/**
- * Class ULogin
- * @package rmrevin\yii\ulogin
- */
 class ULogin
 {
-
     /**
      * @param array $config
      * @return string
+     * @throws \Exception
      */
     public static function widget($config = [])
     {
@@ -48,7 +45,7 @@ class ULogin
 
         if (function_exists('file_get_contents') && ini_get('allow_url_fopen')) {
             $result = Json::decode(file_get_contents($url));
-        } elseif (in_array('curl', get_loaded_extensions())) {
+        } elseif (in_array('curl', get_loaded_extensions(), true)) {
             $request = curl_init($url);
             curl_setopt($request, CURLOPT_RETURNTRANSFER, 1);
             $result = Json::decode(curl_exec($request));

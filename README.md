@@ -9,13 +9,13 @@ The preferred way to install this extension is through [composer](https://getcom
 Either run
 
 ```bash
-composer require "rmrevin/yii2-ulogin:1.3.*"
+composer require "rmrevin/yii2-ulogin:~1.4"
 ```
 
 or add
 
 ```
-"rmrevin/yii2-ulogin": "1.3.*",
+"rmrevin/yii2-ulogin": "~1.4",
 ```
 
 to the `require` section of your `composer.json` file.
@@ -44,6 +44,9 @@ echo ULogin::widget([
 
     // where to should ULogin redirect users after successful login
     'redirectUri' => ['sign/ulogin'],
+
+    // force use https in redirect uri
+    'forceRedirectUrlScheme' => 'https',
 
     // optional params (can be ommited)
     // force widget language (autodetect by default)

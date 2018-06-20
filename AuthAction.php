@@ -3,33 +3,24 @@
  * AuthAction.php
  * @author Revin Roman
  * @link https://rmrevin.com
+ * @link https://github.com/rmrevin/yii2-ulogin
  */
 
 namespace rmrevin\yii\ulogin;
 
 use yii\base\Action;
 
-/**
- * Class AuthAction
- * @package rmrevin\yii\ulogin
- */
 class AuthAction extends Action
 {
-
-    /**
-     * @var callable
-     */
+    /** @var callable */
     public $successCallback;
 
-    /**
-     * @var callable
-     */
+    /** @var callable */
     public $errorCallback;
 
     public function run()
     {
         if (isset($_POST['token'])) {
-
             $token = \Yii::$app->request->post('token');
 
             $data = ULogin::getUserAttributes($token);
